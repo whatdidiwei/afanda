@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>video 的常用事件介绍</title>
+</head>
+
+<body>
+  <video id="video" src="阿凡达2.mkv" width="400" height="250" controls controlslist="nodownload"></video>
+
+  <script>
+    const video = document.getElementById('video')
+    video.volume = 0.1
+
+    // 视频开始加载
+    video.addEventListener('loadstart', e => {
+      console.log('视频开始加载', video.duration)
+    })
+    video.addEventListener('durationchange', e => {
+      console.log('视频durationchange', video.duration)
+    })
+    video.addEventListener('loadedmetadata', e => {
+      console.log('视频loadedmetadata', video.duration)
+    })
+    video.addEventListener('loadeddate', e => {
+      console.log('视频loadeddate', video.duration)
+    })
+    // 视频加载（视频只要在加载就会触发此事件）
+    video.addEventListener('progress', e => {
+      console.log('视频加载中...')
+    })
+    // 视频可以播放了（表示视频已经加载完了一部分）
+    video.addEventListener('canplay', e => {
+      console.log('视频可以播放了')
+    })
+    // 视频可以很流畅的播放了（表示视频加载了足量的进度但是仍旧还没加载完）
+    video.addEventListener('canplaythrough', e => {
+      console.log('视频可以很流畅的播放了')
+    })
+    // 视频由未播放状态切换到了播放状态
+    video.addEventListener('play', e => {
+      console.log('视频播放了')
+    })
+    // 视频由未播放到播放的过程中会触发的“播放中”事件
+    // 注：play 事件会先执行，然后视频接收到“要播放视频“到”视频实际开始播放了“的过程中会触发此事件
+    video.addEventListener('playing', e => {
+      console.log('视频即将播放...')
+    })
+    // 视频正常播放过程中或用户手动调整进度条均会触发的进度条更新事件
+    video.addEventListener('timeupdate', e => {
+      console.log('进度条更新：', e.target.currentTime)
+    })
+    // 视频由播放状态切换到暂停状态了（视频播放结束也会触发此事件）
+    video.addEventListener('pause', e => {
+      console.log('视频暂停了')
+    })
+    // 用户修改了视频的进度条（一修改马上就会触发）
+    video.addEventListener('seeking', e => {
+      console.log('用户调整了进度条位置')
+    })
+    // 用户修改了视频的进度条的操作已经受理完成（也预示着视频已经由新的位置加载成可以播放状态了）
+    video.addEventListener('seeked', e => {
+      console.log('用户调整进度条位置的操作已完成')
+    })
+    // 视频加载中无法正常播放时会触发的“等待”事件
+    video.addEventListener('waiting', e => {
+      console.log('请等待！')
+    })
+    // 视频播放结束
+    video.addEventListener('ended', e => {
+      console.log('视频播放完啦！')
+    })
+    // 视频播放出错
+    video.addEventListener('error', e => {
+      console.log('视频出错啦：', e)
+    })
+
+  </script>
+</body>
+
+</html>
